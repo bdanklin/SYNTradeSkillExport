@@ -1,5 +1,5 @@
-Tradies
-by Cixi@Remulos (Classic Oceanic)
+See You Next Tradeskill
+by Danklin, Netherwind
 
 
 WHAT THE ADDON IS FOR:
