@@ -205,7 +205,7 @@ function synt_pf_serialize (o)
 
 local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/' -- You will need this for encoding/decoding
 -- encoding
-function synt_pf_enc(data)
+--[[ function synt_pf_enc(data)
     return ((data:gsub('.', function(x)
         local r,b='',x:byte()
         for i=8,1,-1 do r=r..(b%2^i-b%2^(i-1)>0 and '1' or '0') end
@@ -216,7 +216,7 @@ function synt_pf_enc(data)
         for i=1,6 do c=c+(x:sub(i,i)=='1' and 2^(6-i) or 0) end
         return b:sub(c+1,c+1)
     end)..({ '', '==', '=' })[#data%3+1])
-end
+end ]]
 
 -------------------------------------------------------------------------
 -- decoding
@@ -235,10 +235,10 @@ function synt_pf_dec(data)
     end))
 end
 
-function encodeBase64(data)
+function synt_pf_enc(data)
 	local b64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 	local s64 = ''
-	local str = source_str
+	local str = data
 
 	while #str > 0 do
 			local bytes_num = 0
