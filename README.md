@@ -16,4 +16,4 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 
 Danklin - Netherwind.
 
-Inspiration from Tradies, By: Cixi - Remulos
+Inspiration from Tradies
