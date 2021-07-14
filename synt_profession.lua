@@ -203,66 +203,35 @@ function synt_pf_serialize (o)
 
 -------------------------------------------------------------------------
 
-local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/' -- You will need this for encoding/decoding
--- encoding
---[[ function synt_pf_enc(data)
-    return ((data:gsub('.', function(x)
-        local r,b='',x:byte()
-        for i=8,1,-1 do r=r..(b%2^i-b%2^(i-1)>0 and '1' or '0') end
-        return r;
-    end)..'0000'):gsub('%d%d%d?%d?%d?%d?', function(x)
-        if (#x < 6) then return '' end
-        local c=0
-        for i=1,6 do c=c+(x:sub(i,i)=='1' and 2^(6-i) or 0) end
-        return b:sub(c+1,c+1)
-    end)..({ '', '==', '=' })[#data%3+1])
-end ]]
 
--------------------------------------------------------------------------
--- decoding
-function synt_pf_dec(data)
-    data = string.gsub(data, '[^'..b..'=]', '')
-    return (data:gsub('.', function(x)
-        if (x == '=') then return '' end
-        local r,f='',(b:find(x)-1)
-        for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
-        return r;
-    end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
-		if (#x ~= 8) then return '' end
-        local c=0
-        for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
-            return string.char(c)
-    end))
-end
+	function synt_pf_enc(data)
+		local b64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+		local s64 = ''
+		local str = data
 
-function synt_pf_enc(data)
-	local b64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-	local s64 = ''
-	local str = data
+		while #str > 0 do
+				local bytes_num = 0
+				local buf = 0
 
-	while #str > 0 do
-			local bytes_num = 0
-			local buf = 0
+				for byte_cnt=1,3 do
+						buf = (buf * 256)
+						if #str > 0 then
+								buf = buf + string.byte(str, 1, 1)
+								str = string.sub(str, 2)
+								bytes_num = bytes_num + 1
+						end
+				end
 
-			for byte_cnt=1,3 do
-					buf = (buf * 256)
-					if #str > 0 then
-							buf = buf + string.byte(str, 1, 1)
-							str = string.sub(str, 2)
-							bytes_num = bytes_num + 1
-					end
-			end
+				for group_cnt=1,(bytes_num+1) do
+						local b64char = math.fmod(math.floor(buf/262144), 64) + 1
+						s64 = s64 .. string.sub(b64chars, b64char, b64char)
+						buf = buf * 64
+				end
 
-			for group_cnt=1,(bytes_num+1) do
-					local b64char = math.fmod(math.floor(buf/262144), 64) + 1
-					s64 = s64 .. string.sub(b64chars, b64char, b64char)
-					buf = buf * 64
-			end
+				for fill_cnt=1,(3-bytes_num) do
+						s64 = s64 .. '='
+				end
+		end
 
-			for fill_cnt=1,(3-bytes_num) do
-					s64 = s64 .. '='
-			end
+		return s64
 	end
-
-	return s64
-end
