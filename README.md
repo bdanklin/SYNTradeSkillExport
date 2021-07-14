@@ -1,4 +1,4 @@
-# See You Next Tradeskill
+# ![](/assets/static/favicon/favicon-32x32.png) SeeYouNextTradeskill
 
 This addon is used to upload tradeskill information from World of Warcraft Classic to the See You Next Tuesday Discord Bot.
 
