@@ -1,8 +1,0 @@
-## Interface: 20501
-## Title: See You Next Profession
-## Author: Benjamin Danklin
-## Notes: Notes
-## SavedVariables:
-## SavedVariablesPerCharacter: synt_profession
-## Version: 100
-synt_profession.lua

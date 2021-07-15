@@ -1,0 +1,12 @@
+## Interface: 20501
+## Title: Tradeskill - Export
+## Author: Benjamin Danklin
+## Notes: Let people know what you can do!
+## SavedVariables:
+## SavedVariablesPerCharacter: Tradies_List
+## Version: 420
+## OptionalDeps: Masque
+Tradies.lua
+
+# Libraries
+Libs\Libs.xml
