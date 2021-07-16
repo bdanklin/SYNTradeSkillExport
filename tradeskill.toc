@@ -5,5 +5,5 @@
 ## SavedVariables:
 ## SavedVariablesPerCharacter: tradeskill_list
 ## Version: 420
-## Curse-id: 504270  
+## X-Curse-Project-ID: 504270  
 tradeskill.lua
