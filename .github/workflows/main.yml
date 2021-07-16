@@ -62,6 +62,9 @@ jobs:
         asset_name: ${{steps.init.outputs.tag_name}}-BurningCrusade.zip
         asset_content_type: application/zip
 
+    - name: Clone project
+      uses: actions/checkout@v1  # note: checkout@v2 breaks git history, so generating a changelog and
+                                   # file naming for non-tagged builds will not work properly
     - name: Upload to Curseforge
       env:
         CF_API_KEY: ${{ secrets.CF_API_KEY }}
