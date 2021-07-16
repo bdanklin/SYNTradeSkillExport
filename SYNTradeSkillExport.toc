@@ -1,9 +1,5 @@
 ## Interface: 20501
-<<<<<<< HEAD
 ## Title: |cffff6188S|cfffc9867Y|cffffd866N|cffa9dc76Trade|cff78dce8Skill|cffab9df2Export|r
-=======
-## Title: See You Next TradeSkillExport
->>>>>>> 5716f79ce8c058dd28380ea6134d92fed77a1fca
 ## Author: Benjamin Danklin
 ## Notes: Let people know what you can do!
 ## SavedVariables:
