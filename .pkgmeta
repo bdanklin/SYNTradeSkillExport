@@ -1,8 +1,4 @@
-package-as: tradeskill
-
-move-folders:
-  Monkey/Modules/Suit: Monkey_Suit
-  Monkey/Modules/Hat: Monkey_Hat
+package-as: SYNTradeSkillExport
 
 ignore:
   - Scripts
