@@ -1,4 +1,4 @@
-name: Package World of Warcraft addon
+name: Push Release to Curseforge
 
 on:
   workflow_dispatch:
