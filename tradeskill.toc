@@ -1,5 +1,5 @@
 ## Interface: 20501
-## Title: See You Next Tradeskill Export
+## Title: TradeskillExport
 ## Author: Benjamin Danklin
 ## Notes: Let people know what you can do!
 ## SavedVariables:
