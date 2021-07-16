@@ -11,7 +11,7 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 
 #### Usage
 
-- Open a tradeskill window > Copy string.
+- Open a Crafting Window > Hit the Bird > Copy string.
 - Open Discord > Paste string.
 
 #### Whomst?
