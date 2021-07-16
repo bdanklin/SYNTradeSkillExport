@@ -5,7 +5,7 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 
 #### Installation
 
-- Install using [Ajour](https://github.com/ajour/ajour)
+- Install using [Ajour](https://github.com/ajour/ajour) or [Curse](https://www.curseforge.com/wow/addons/see-you-next-tradeskill-export)
 - Restart World of Warcraft Classic.
 
 #### Usage
@@ -17,4 +17,5 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 
 Danklin - Netherwind.
 
-Inspiration from Tradies
+
+
