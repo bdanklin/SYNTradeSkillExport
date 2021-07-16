@@ -1,74 +1,40 @@
-name: Push Release to Curseforge
+name: Package and release
 
+# we need to let GitHub know _when_ we want to release, typically only when we create a new tag.
+# this will target only tags, and not all pushes to the master branch.
+# this part can be heavily customized to your liking, like targeting only tags that match a certain word,
+# other branches or even pullrequests.
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Addon version'
-        required: true
+  push:
+    tags:
+      - '**'
 
-env:
-  CLASSIC_VERSION: 11307
-  BURNING_CRUSADE_VERSION: 20501
-
+# a workflow is built up as jobs, and within these jobs are steps
 jobs:
-  package:
-    name: Create zips and tag
+
+  # "release" is a job, you can name it anything you want
+  release:
+
+    # we can run our steps on pretty much anything, but the "ubuntu-latest" image is a safe bet
     runs-on: ubuntu-latest
+
+    # specify the environment variables used by the packager, matching the secrets from the project on GitHub
+    env:
+      CF_API_KEY: ${{ secrets.CF_API_KEY }}
+      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}  # "GITHUB_TOKEN" is a secret always provided to the workflow
+                                                 # for your own token, the name cannot start with "GITHUB_"
+
+    # "steps" holds a list of all the steps needed to package and release our AddOn
     steps:
-    
-    - uses: actions/checkout@v2
-    
-    - name: Get name of addon
-      id: init
-      run: |
-        addon_name=$(ls *.toc)
-        addon_name=$(basename $addon_name .toc)
-        tag_name=${addon_name}-${{github.event.inputs.version}}
-        echo "::set-output name=addon_name::${addon_name}"
-        echo "::set-output name=tag_name::${tag_name}"
-    - name: Make folder for zips
-      run: |
-        mkdir -p .releases/${{steps.init.outputs.addon_name}}
-        rsync -r --exclude '.*' . .releases/${{steps.init.outputs.addon_name}}
- 
-    - name: Replace TOC version for Burning Crusade
-      run: |
-        sed -i 's/Interface: *[0-9]\+/Interface: ${{env.BURNING_CRUSADE_VERSION}}/g' .releases/${{steps.init.outputs.addon_name}}/${{steps.init.outputs.addon_name}}.toc
-    - name: Create Burning Crusade zip
-      run: |
-        cd .releases
-        zip -9 -r ${{steps.init.outputs.tag_name}}-BurningCrusade.zip ${{steps.init.outputs.addon_name}}
-        cd ..
-    - name: Tag this version
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{steps.init.outputs.tag_name}}
-        release_name: ${{steps.init.outputs.addon_name}} ${{github.event.inputs.version}}
-        body: ${{steps.init.outputs.addon_name}} ${{github.event.inputs.version}}
-        draft: false
-        prerelease: false
 
-    - name: Add Classic TBC zip to release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: .releases/${{steps.init.outputs.tag_name}}-BurningCrusade.zip
-        asset_name: ${{steps.init.outputs.tag_name}}-BurningCrusade.zip
-        asset_content_type: application/zip
-
-    - name: Clone project
-      uses: actions/checkout@v1  # note: checkout@v2 breaks git history, so generating a changelog and
+      # we first have to clone the AddOn project, this is a required step
+      - name: Clone project
+        uses: actions/checkout@v1  # note: checkout@v2 breaks git history, so generating a changelog and
                                    # file naming for non-tagged builds will not work properly
-    - name: Upload to Curseforge
-      env:
-        CF_API_KEY: ${{ secrets.CF_API_KEY }}
-        GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
-      uses: BigWigsMods/packager@v1
-      with:
-        args: -g classic -w 0 -p 504270 -a 0
+
+      # another example where we supply additional arguments, this example is specifically to release
+      # for the Classic version of the game
+      - name: Package and release for Classic
+        uses: BigWigsMods/packager@v1
+        with:
+          args: -g classic-tbc -w 0
