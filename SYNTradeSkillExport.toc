@@ -1,5 +1,5 @@
 ## Interface: 20501
-## Title: SYNTradeSkillExport
+## Title: See You Next TradeSkillExport
 ## Author: Benjamin Danklin
 ## Notes: Let people know what you can do!
 ## SavedVariables:
