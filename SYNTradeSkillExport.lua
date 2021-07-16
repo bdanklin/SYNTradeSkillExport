@@ -10,7 +10,7 @@ ts_frame:SetScript("OnEvent", function(self, event, ...)
 
 	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg, arg9 = ...
 
-	if event == "ADDON_LOADED" and arg1 == "Tradies" then
+	if event == "ADDON_LOADED" and arg1 == "SYNTradeSkillExport" then
 		if tradeskill_list == nil then tradeskill_list = {} end
 	end
 
