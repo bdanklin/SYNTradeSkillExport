@@ -11,7 +11,7 @@ ts_frame:SetScript("OnEvent", function(self, event, ...)
 	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg, arg9 = ...
 
 	if event == "ADDON_LOADED" and arg1 == "Tradies" then
-		if Tradies_List == nil then Tradies_List = {} end
+		if tradeskill_list == nil then tradeskill_list = {} end
 	end
 
 	if event == "TRADE_SKILL_UPDATE" or event == "TRADE_SKILL_SHOW" then
@@ -19,7 +19,7 @@ ts_frame:SetScript("OnEvent", function(self, event, ...)
 			itemLink = GetTradeSkillItemLink(i)
 			if itemLink ~= nil then
 				local _, _, _, _, Id = string.find(itemLink, "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
-				Tradies_List[Id] = ""
+				tradeskill_list[Id] = ""
 			end
 		end
 
@@ -31,7 +31,7 @@ ts_frame:SetScript("OnEvent", function(self, event, ...)
 			ts_button:SetNormalTexture("Interface/Icons/inv_misc_thegoldencheep")
 			ts_button:SetHighlightTexture("Interface/Icons/inv_misc_thegoldencheep")
 			ts_button:SetToplevel(true)
-			ts_button:SetScript("OnClick", function()Tradies_Export(true)end)
+			ts_button:SetScript("OnClick", function()Tradeskill_Export(true)end)
 		end
 	end
 end)
@@ -40,7 +40,7 @@ end)
 -- Show Export Window
 -------------------------------------------------------------------------------
 
-function Tradies_Export(isTr)
+function Tradeskill_Export(isTr)
 	local player = {}
 	player.g, _, _ = GetGuildInfo("player")
 
@@ -51,18 +51,18 @@ function Tradies_Export(isTr)
 	_, player.r = UnitRace("player")
 
 	local serplayer = encode_json(player)
-	local sertradies = encode_json(Tradies_List)
+	local sertradies = encode_json(tradeskill_list)
 	ser = ">>v" .. ts_ver .. ">>p" .. serplayer .. ">>t" .. sertradies
 
 
 	local encoded = Serialize(ser)
-	StaticPopupDialogs["EXPORT_TRADIES"] = {
+	StaticPopupDialogs["EXPORT_TRADESKILL"] = {
 		text = "Copy the text below, then send it to the See You Next Tuesday Discord bot.",
 		button1 = "Done",
 		OnShow = function (self, data)
 			self.editBox:SetText(""..encoded)
 			self.editBox:HighlightText()
-			self.editBox:SetScript("OnEscapePressed", function(self) StaticPopup_Hide ("EXPORT_TRADIES") end)
+			self.editBox:SetScript("OnEscapePressed", function(self) StaticPopup_Hide ("EXPORT_TRADESKILL") end)
 			end,
 		timeout = 0,
 		hasEditBox = true,
@@ -71,7 +71,7 @@ function Tradies_Export(isTr)
 		hideOnEscape = true,
 		preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
 	}
-	StaticPopup_Show ("EXPORT_TRADIES")
+	StaticPopup_Show ("EXPORT_TRADESKILL")
 
 end
 

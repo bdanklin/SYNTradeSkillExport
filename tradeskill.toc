@@ -1,11 +1,10 @@
 ## Interface: 20501
-## Title: Tradeskill - Export
+## Title: See You Next Tradeskill Export
 ## Author: Benjamin Danklin
 ## Notes: Let people know what you can do!
 ## SavedVariables:
-## SavedVariablesPerCharacter: Tradies_List
+## SavedVariablesPerCharacter: tradeskill_list
 ## Version: 420
-## OptionalDeps: Masque
 Tradies.lua
 
 # Libraries
