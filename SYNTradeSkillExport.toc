@@ -6,4 +6,4 @@
 ## SavedVariablesPerCharacter: tradeskill_list
 ## Version: 420
 ## X-Curse-Project-ID: 504270
-tradeskill.lua
+SYNTradeSkillExport.lua
