@@ -31,14 +31,7 @@ jobs:
       run: |
         mkdir -p .releases/${{steps.init.outputs.addon_name}}
         rsync -r --exclude '.*' . .releases/${{steps.init.outputs.addon_name}}
-    - name: Replace TOC version for Classic
-      run: |
-        sed -i 's/Interface: *[0-9]\+/Interface: ${{env.CLASSIC_VERSION}}/g' .releases/${{steps.init.outputs.addon_name}}/${{steps.init.outputs.addon_name}}.toc
-    - name: Create Classic zip
-      run: |
-        cd .releases
-        zip -9 -r ${{steps.init.outputs.tag_name}}-Classic.zip ${{steps.init.outputs.addon_name}}
-        cd ..
+ 
     - name: Replace TOC version for Burning Crusade
       run: |
         sed -i 's/Interface: *[0-9]\+/Interface: ${{env.BURNING_CRUSADE_VERSION}}/g' .releases/${{steps.init.outputs.addon_name}}/${{steps.init.outputs.addon_name}}.toc
@@ -59,27 +52,7 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: Add retail zip to release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: .releases/${{steps.init.outputs.tag_name}}.zip
-        asset_name: ${{steps.init.outputs.tag_name}}.zip
-        asset_content_type: application/zip
-
-    - name: Add Classic zip to release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: .releases/${{steps.init.outputs.tag_name}}-Classic.zip
-        asset_name: ${{steps.init.outputs.tag_name}}-Classic.zip
-        asset_content_type: application/zip
-
-    - name: Add Classic zip to release
+    - name: Add Classic TBC zip to release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
