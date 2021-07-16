@@ -1,3 +1,17 @@
-package-as: TradeskillExport
+package-as: Tradeskill
 
-ignore: README.md
+move-folders:
+  Monkey/Modules/Suit: Monkey_Suit
+  Monkey/Modules/Hat: Monkey_Hat
+
+ignore:
+  - Scripts
+  - Modules/Debug.lua
+  - *.txt
+
+tools-used:
+  - data-tools
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
