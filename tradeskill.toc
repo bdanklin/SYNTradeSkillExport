@@ -5,7 +5,5 @@
 ## SavedVariables:
 ## SavedVariablesPerCharacter: tradeskill_list
 ## Version: 420
-Tradies.lua
-
-# Libraries
-Libs\Libs.xml
+## curse-id: 504270  
+tradeskill.lua
