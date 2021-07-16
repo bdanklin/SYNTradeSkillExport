@@ -1,9 +1,9 @@
 ## Interface: 20501
-## Title: TradeskillExport
+## Title: SYNTradeSkillExport
 ## Author: Benjamin Danklin
 ## Notes: Let people know what you can do!
 ## SavedVariables:
 ## SavedVariablesPerCharacter: tradeskill_list
 ## Version: 420
-## X-Curse-Project-ID: 504270  
+## X-Curse-Project-ID: 504270
 tradeskill.lua
