@@ -68,4 +68,4 @@ jobs:
         GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
       uses: BigWigsMods/packager@v1
       with:
-        args: -g classic -w 0 -p 504270 -a 0 -n ${{steps.init.outputs.tag_name}}-BurningCrusade.zip
+        args: -g classic -w 0 -p 504270 -a 0
