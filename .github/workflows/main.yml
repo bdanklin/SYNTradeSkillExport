@@ -15,10 +15,10 @@ jobs:
   package:
     name: Create zips and tag
     runs-on: ubuntu-latest
-
     steps:
+    
     - uses: actions/checkout@v2
-
+    
     - name: Get name of addon
       id: init
       run: |
@@ -61,3 +61,11 @@ jobs:
         asset_path: .releases/${{steps.init.outputs.tag_name}}-BurningCrusade.zip
         asset_name: ${{steps.init.outputs.tag_name}}-BurningCrusade.zip
         asset_content_type: application/zip
+
+    - name: Upload to Curseforge
+      env:
+        CF_API_KEY: ${{ secrets.CF_API_KEY }}
+        GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+      uses: BigWigsMods/packager@v1
+      with:
+        args: -g classic -w 0 -p 504270 -a 0 -n ${{steps.init.outputs.tag_name}}-BurningCrusade.zip
