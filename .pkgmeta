@@ -1,4 +1,4 @@
-package-as: Tradeskill
+package-as: tradeskill
 
 move-folders:
   Monkey/Modules/Suit: Monkey_Suit
