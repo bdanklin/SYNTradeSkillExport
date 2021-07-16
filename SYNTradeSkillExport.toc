@@ -1,5 +1,5 @@
 ## Interface: 20501
-## Title: SYNTradeSkillExport
+## Title: |cffff6188S|cfffc9867Y|cffffd866N|cffa9dc76Trade|cff78dce8Skill|cffab9df2Export|r
 ## Author: Benjamin Danklin
 ## Notes: Let people know what you can do!
 ## SavedVariables:
