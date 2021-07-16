@@ -1,4 +1,4 @@
-# ![](favicon-32x32.png) Tradeskill
+# ![](favicon-32x32.png) See You Next Tradeskill Export
 
 This addon is used to upload tradeskill information from World of Warcraft Classic to the See You Next Tuesday Discord Bot.
 
