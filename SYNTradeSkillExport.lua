@@ -42,13 +42,12 @@ end)
 
 function Tradeskill_Export(isTr)
 	local player = {}
-	player.g, _, _ = GetGuildInfo("player")
-
+	player.g = GetGuildInfo("player")
 	player.n = UnitName("player")
-	player.R = GetRealmName()
-	player.F = UnitFactionGroup("player")
-	_, player.c = UnitClass("player")
-	_, player.r = UnitRace("player")
+	player.s = GetRealmName()
+	player.f = UnitFactionGroup("player")
+	player.c = UnitClass("player")
+	player.r = UnitRace("player")
 
 	local serplayer = encode_json(player)
 	local sertradies = encode_json(tradeskill_list)
@@ -60,7 +59,7 @@ function Tradeskill_Export(isTr)
 		text = "Copy the text below, then send it to the See You Next Tuesday Discord bot.",
 		button1 = "Done",
 		OnShow = function (self, data)
-			self.editBox:SetText(""..encoded)
+			self.editBox:SetText("syntradeskillexport"..encoded)
 			self.editBox:HighlightText()
 			self.editBox:SetScript("OnEscapePressed", function(self) StaticPopup_Hide ("EXPORT_TRADESKILL") end)
 			end,
