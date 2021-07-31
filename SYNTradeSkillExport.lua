@@ -1,65 +1,102 @@
-local ts_ver = "420"
-local ts_button = nil
-
+local ts_ver = "421"
 local ts_frame = CreateFrame("Frame")
+local ts_page = 1
+
 ts_frame:RegisterEvent("ADDON_LOADED")
-ts_frame:RegisterEvent("TRADE_SKILL_SHOW")
-ts_frame:RegisterEvent("TRADE_SKILL_UPDATE");
+ts_frame:RegisterEvent("SKILL_LINES_CHANGED")
+ts_frame:RegisterEvent("TRADE_SKILL_UPDATE")
+ts_frame:RegisterEvent("TRADE_SKILL_CLOSE")
+ts_frame:RegisterEvent("CRAFT_UPDATE")
+ts_frame:RegisterEvent("CRAFT_CLOSE");
 
 ts_frame:SetScript("OnEvent", function(self, event, ...)
 
 	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg, arg9 = ...
+	player_name = UnitName("player").."-"..GetRealmName()
 
 	if event == "ADDON_LOADED" and arg1 == "SYNTradeSkillExport" then
 		if tradeskill_list == nil then tradeskill_list = {} end
+		if export_data == nil then export_data = {} end
+		if export_data[player_name] == nil then export_data[player_name] = {} end
+		export_data[player_name].guild_name = GetGuildInfo("player")
+		export_data[player_name].character_name = UnitName("player")
+		export_data[player_name].realm_name = GetRealmName()
+		export_data[player_name].faction_name = UnitFactionGroup("player")
+		export_data[player_name].class_name = UnitClass("player")
+		export_data[player_name].race_name = UnitRace("player")
 	end
 
-	if event == "TRADE_SKILL_UPDATE" or event == "TRADE_SKILL_SHOW" then
-		for i=1, GetNumTradeSkills() do
-			itemLink = GetTradeSkillItemLink(i)
-			if itemLink ~= nil then
-				local _, _, _, _, Id = string.find(itemLink, "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
-				tradeskill_list[Id] = ""
+	-------------------------------------------------------------------------------
+	-- Update Spellbook Spells To Try Find a Profession Spec
+	-------------------------------------------------------------------------------
+
+	if event == "SKILL_LINES_CHANGED" then
+		if export_data[player_name].spellbook_items == nil then export_data[player_name].spellbook_items = {} end
+
+		local _, _, _, numSpells, _, _, _, _ = GetSpellTabInfo(ts_page)
+		for i=1, numSpells do
+			_, spellbook_item_id = GetSpellBookItemInfo(i, ts_ver)
+			spellbook_item_name, _, _, _, _, _, _ = GetSpellInfo(spellbook_item_id)
+			export_data[player_name].spellbook_items[tostring(spellbook_item_id)] = spellbook_item_name
+		end
+	end
+
+	-------------------------------------------------------------------------------
+	-- Update Trade Skills. (Everything But Enchanting)
+	-------------------------------------------------------------------------------
+
+	if event == "TRADE_SKILL_UPDATE" then
+		if export_data[player_name].professions == nil then export_data[player_name].professions = {} end
+		local i2 = GetNumTradeSkills()
+		for i=1, i2 do
+			ts_link = GetTradeSkillItemLink(i)
+			if ts_link ~= nil then
+				local _, _, _, _, Id = string.find(ts_link, "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
+				export_data[player_name].professions[Id] = GetItemInfo(Id)
 			end
 		end
-
-		if ts_button == nil then
-			ts_button = CreateFrame("Button","TradeSkillsExport",TradeSkillFrame)
-			ts_button:SetWidth(40)
-			ts_button:SetHeight(40)
-			ts_button:SetPoint("TOPLEFT", TradeSkillFrame, "TOPRIGHT", -30, -13)
-			ts_button:SetNormalTexture("Interface/Icons/inv_misc_thegoldencheep")
-			ts_button:SetHighlightTexture("Interface/Icons/inv_misc_thegoldencheep")
-			ts_button:SetToplevel(true)
-			ts_button:SetScript("OnClick", function()Tradeskill_Export(true)end)
-		end
+		Tradeskill_Export()
 	end
+
+	-------------------------------------------------------------------------------
+	-- Update Crafts. (Enchanting)
+	-------------------------------------------------------------------------------
+
+	if event == "CRAFT_UPDATE" then
+		if export_data[player_name].professions == nil then export_data[player_name].professions = {} end
+		local k2 = GetNumCrafts()
+		for k=1, k2 do
+			craft_link = GetCraftItemLink(k)
+			if craft_link ~= nil then
+				local _, _, _, _, Id = string.find(craft_link, "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
+				export_data[player_name].professions[Id] = GetCraftInfo(k)
+			end
+		end
+		Tradeskill_Export()
+	end
+
+	if event == "CRAFT_CLOSE" or  event == "TRADE_SKILL_CLOSE" then
+		StaticPopup_Hide("EXPORT_TRADESKILL")
+	end
+
 end)
+
 
 -------------------------------------------------------------------------------
 -- Show Export Window
 -------------------------------------------------------------------------------
 
-function Tradeskill_Export(isTr)
-	local player = {}
-	player.g = GetGuildInfo("player")
-	player.n = UnitName("player")
-	player.s = GetRealmName()
-	player.f = UnitFactionGroup("player")
-	player.c = UnitClass("player")
-	player.r = UnitRace("player")
-
-	local serplayer = encode_json(player)
-	local sertradies = encode_json(tradeskill_list)
-	ser = ">>v" .. ts_ver .. ">>p" .. serplayer .. ">>t" .. sertradies
+function Tradeskill_Export()
 
 
-	local encoded = Serialize(ser)
+	export_data_json = encode_json(export_data)
+	ser = ts_ver .. ">>" .. export_data_json
+	serialized_json_export_data = Serialize(ser)
 	StaticPopupDialogs["EXPORT_TRADESKILL"] = {
-		text = "Copy the text below, then send it to the See You Next Tuesday Discord bot.",
+		text = "Paste this string into your guilds #professions channel on discord.",
 		button1 = "Done",
 		OnShow = function (self, data)
-			self.editBox:SetText("syntradeskillexport"..encoded)
+			self.editBox:SetText("syntradeskillexport".. serialized_json_export_data)
 			self.editBox:HighlightText()
 			self.editBox:SetScript("OnEscapePressed", function(self) StaticPopup_Hide ("EXPORT_TRADESKILL") end)
 			end,
@@ -138,13 +175,11 @@ local function encode_table(val, stack)
   local res = {}
   stack = stack or {}
 
-  -- Circular reference?
   if stack[val] then error("circular reference") end
 
   stack[val] = true
 
   if rawget(val, 1) ~= nil or next(val) == nil then
-    -- Treat as array -- check keys are valid and it is not sparse
     local n = 0
     for k in pairs(val) do
       if type(k) ~= "number" then
@@ -155,7 +190,6 @@ local function encode_table(val, stack)
     if n ~= #val then
       error("invalid table: sparse array")
     end
-    -- Encode
     for i, v in ipairs(val) do
       table.insert(res, encode(v, stack))
     end
@@ -163,7 +197,6 @@ local function encode_table(val, stack)
     return "[" .. table.concat(res, ",") .. "]"
 
   else
-    -- Treat as an object
     for k, v in pairs(val) do
       if type(k) ~= "string" then
         error("invalid table: mixed or invalid key types")
@@ -180,7 +213,6 @@ local function encode_string(val)
 end
 
 local function encode_number(val)
-  -- Check for NaN, -inf and inf
   if val ~= val or val <= -math.huge or val >= math.huge then
     error("unexpected number value '" .. tostring(val) .. "'")
   end

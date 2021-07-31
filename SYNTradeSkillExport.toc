@@ -1,9 +1,9 @@
 ## Interface: 20501
 ## Title: |cffff6188S|cfffc9867Y|cffffd866N|cffa9dc76Trade|cff78dce8Skill|cffab9df2Export|r
 ## Author: Benjamin Danklin
-## Notes: Let people know what you can do!
-## SavedVariables:
+## Notes: Can anyone enchant mongoose?
+## SavedVariables: export_data
 ## SavedVariablesPerCharacter: tradeskill_list
-## Version: 420
+## Version: 421
 ## X-Curse-Project-ID: 504270
 SYNTradeSkillExport.lua
