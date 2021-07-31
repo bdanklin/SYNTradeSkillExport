@@ -8,11 +8,12 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 
 #### Installation
 
-- Install using [Ajour](https://github.com/ajour/ajour) or [Curse](https://www.curseforge.com/wow/addons/see-you-next-tradeskill-export)
+- Recommended to install using [Ajour](https://github.com/ajour/ajour) using the GitHub URL as the source. 
+- or [Curse](https://www.curseforge.com/wow/addons/see-you-next-tradeskill-export)
 
 #### Usage
 
-- Open a Crafting Window > Hit the Bird > Copy string > Open Discord > Paste string.
+- Open a Crafting Window > Copy string > Open Discord > Paste string.
 
 #### Whomst?
 
