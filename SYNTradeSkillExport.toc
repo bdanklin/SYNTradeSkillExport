@@ -4,6 +4,6 @@
 ## Notes: Can anyone enchant mongoose?
 ## SavedVariables: export_data
 ## SavedVariablesPerCharacter: tradeskill_list
-## Version: 1.0
+## Version: 423
 ## X-Curse-Project-ID: 504270
 SYNTradeSkillExport.lua

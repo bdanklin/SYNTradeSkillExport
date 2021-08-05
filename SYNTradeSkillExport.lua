@@ -1,4 +1,4 @@
-local ts_ver = "1.0"
+local ts_ver = "423"
 local ts_frame = CreateFrame("Frame")
 local ts_page = 1
 
