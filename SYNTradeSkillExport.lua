@@ -19,12 +19,7 @@ ts_frame:SetScript("OnEvent", function(self, event, ...)
 		if tradeskill_list == nil then tradeskill_list = {} end
 		if export_data == nil then export_data = {} end
 		if export_data[player_name] == nil then export_data[player_name] = {} end
-		export_data[player_name].guild_name = g_name
-		export_data[player_name].character_name = UnitName("player")
-		export_data[player_name].realm_name = GetRealmName()
-		export_data[player_name].faction_name = UnitFactionGroup("player")
-		export_data[player_name].class_name = UnitClass("player")
-		export_data[player_name].race_name = UnitRace("player")
+
 	end
 
 	-------------------------------------------------------------------------------
