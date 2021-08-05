@@ -8,7 +8,7 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 
 #### Installation
 
-- Recommended to install using [Ajour](https://github.com/ajour/ajour) using the GitHub URL as the source. 
+- Recommended to install using [Ajour](https://github.com/ajour/ajour) using the GitHub URL as the source.
 - or [Curse](https://www.curseforge.com/wow/addons/see-you-next-tradeskill-export)
 
 #### Usage
