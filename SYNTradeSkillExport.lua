@@ -13,12 +13,12 @@ ts_frame:SetScript("OnEvent", function(self, event, ...)
 
 	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg, arg9 = ...
 	player_name = UnitName("player").."-"..GetRealmName()
+	g_name, _, _, _ = GetGuildInfo("player")
 
 	if event == "ADDON_LOADED" and arg1 == "SYNTradeSkillExport" then
 		if tradeskill_list == nil then tradeskill_list = {} end
 		if export_data == nil then export_data = {} end
 		if export_data[player_name] == nil then export_data[player_name] = {} end
-		g_name, _, _, _ = GetGuildInfo("player")
 		export_data[player_name].guild_name = g_name
 		export_data[player_name].character_name = UnitName("player")
 		export_data[player_name].realm_name = GetRealmName()
@@ -88,7 +88,12 @@ end)
 -------------------------------------------------------------------------------
 
 function Tradeskill_Export()
-
+		export_data[player_name].guild_name = g_name
+		export_data[player_name].character_name = UnitName("player")
+		export_data[player_name].realm_name = GetRealmName()
+		export_data[player_name].faction_name = UnitFactionGroup("player")
+		export_data[player_name].class_name = UnitClass("player")
+		export_data[player_name].race_name = UnitRace("player")
 
 	export_data_json = encode_json(export_data)
 	ser = ts_ver .. ">>" .. export_data_json
