@@ -17,6 +17,7 @@ ts_frame:SetScript("OnEvent", function(self, event, ...)
 
 	if event == "ADDON_LOADED" and arg1 == "SYNTradeSkillExport" then
 		if tradeskill_list == nil then tradeskill_list = {} end
+		if craft_list == nil then craft_list = {} end
 		if export_data == nil then export_data = {} end
 		if export_data[player_name] == nil then export_data[player_name] = {} end
 
@@ -59,13 +60,13 @@ ts_frame:SetScript("OnEvent", function(self, event, ...)
 	-------------------------------------------------------------------------------
 
 	if event == "CRAFT_UPDATE" then
-		if export_data[player_name].professions == nil then export_data[player_name].professions = {} end
+		if export_data[player_name].crafts == nil then export_data[player_name].crafts = {} end
 		local k2 = GetNumCrafts()
 		for k=1, k2 do
 			craft_link = GetCraftItemLink(k)
 			if craft_link ~= nil then
 				local _, _, _, _, Id = string.find(craft_link, "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
-				export_data[player_name].professions[Id] = GetCraftInfo(k)
+				export_data[player_name].crafts[Id] = GetCraftInfo(k)
 			end
 		end
 		Tradeskill_Export()
