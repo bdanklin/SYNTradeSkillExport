@@ -4,6 +4,6 @@
 ## Notes: Who can do Mongoose?!??!
 ## SavedVariables: export_data
 ## SavedVariablesPerCharacter: tradeskill_list, craft_list
-## Version: 423
+## Version: 424
 ## X-Curse-Project-ID: 504270
 SYNTradeSkillExport.lua
