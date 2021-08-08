@@ -6,6 +6,14 @@
 
 This addon is used to upload tradeskill information from World of Warcraft Classic to the See You Next Tuesday Discord Bot.
 
+#### Uploading Your Professions
+
+![image](https://user-images.githubusercontent.com/34633373/128625093-a4145151-3fa6-431b-aede-684addf192e2.png)
+
+![image](https://user-images.githubusercontent.com/34633373/128625145-d022eb59-cd23-44f9-a2cf-f8ab994f83a9.png)
+
+![image](https://user-images.githubusercontent.com/34633373/128625207-948d3e0a-4d1a-4f88-abb3-13f79f12ab8d.png)
+
 #### Usage
 
 Search for an item using !item [itemname]
@@ -25,13 +33,6 @@ Search for an item using !item [itemname]
 
 ![image](https://user-images.githubusercontent.com/34633373/128624746-4d457a64-3dbe-4088-807d-cc5473802056.png)
 
-#### Uploading Your Professions
-
-![image](https://user-images.githubusercontent.com/34633373/128625093-a4145151-3fa6-431b-aede-684addf192e2.png)
-
-![image](https://user-images.githubusercontent.com/34633373/128625145-d022eb59-cd23-44f9-a2cf-f8ab994f83a9.png)
-
-![image](https://user-images.githubusercontent.com/34633373/128625207-948d3e0a-4d1a-4f88-abb3-13f79f12ab8d.png)
 
 
 
