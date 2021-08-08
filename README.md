@@ -6,7 +6,7 @@
 
 This addon is used to upload tradeskill information from World of Warcraft Classic to the See You Next Tuesday Discord Bot.
 
-#### Uploading Your Professions
+## Uploading Your Professions
 
 ![image](https://user-images.githubusercontent.com/34633373/128625093-a4145151-3fa6-431b-aede-684addf192e2.png)
 
@@ -14,14 +14,14 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 
 ![image](https://user-images.githubusercontent.com/34633373/128625207-948d3e0a-4d1a-4f88-abb3-13f79f12ab8d.png)
 
-#### Usage
+## Usage
 
 Search for an item using !item [itemname]
 
 ![image](https://user-images.githubusercontent.com/34633373/128625371-01ca292e-e6ce-4f0f-aaf4-017bbfc94260.png)
 
 
-#### Installation
+## Installation
 
 - Recommended to install using [Ajour](https://github.com/ajour/ajour) using the GitHub URL as the source.
 
@@ -36,6 +36,6 @@ Search for an item using !item [itemname]
 
 
 
-#### Whomst?
+## Whomst?
 
 Danklin - Netherwind.
