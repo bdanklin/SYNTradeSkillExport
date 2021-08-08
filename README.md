@@ -14,12 +14,6 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 
 ![image](https://user-images.githubusercontent.com/34633373/128625207-948d3e0a-4d1a-4f88-abb3-13f79f12ab8d.png)
 
-## Usage
-
-Search for an item using !item [itemname]
-
-![image](https://user-images.githubusercontent.com/34633373/128625371-01ca292e-e6ce-4f0f-aaf4-017bbfc94260.png)
-
 
 ## Installation
 
