@@ -31,7 +31,7 @@ Search for an item using !item [itemname]
 
 - Also available on [Curse](https://www.curseforge.com/wow/addons/see-you-next-tradeskill-export)
 
-![image](https://user-images.githubusercontent.com/34633373/128624746-4d457a64-3dbe-4088-807d-cc5473802056.png)
+![image](https://user-images.githubusercontent.com/34633373/128625577-524984c1-ce1e-4e61-93be-dd3be9a1a736.png)
 
 
 
