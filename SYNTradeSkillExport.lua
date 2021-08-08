@@ -52,7 +52,14 @@ ts_frame:SetScript("OnEvent", function(self, event, ...)
 				export_data[player_name].professions[Id] = GetItemInfo(Id)
 			end
 		end
-		Tradeskill_Export()
+		export_data[player_name].guild_name = g_name
+		export_data[player_name].character_name = UnitName("player")
+		export_data[player_name].realm_name = GetRealmName()
+		export_data[player_name].faction_name = UnitFactionGroup("player")
+		export_data[player_name].class_name = UnitClass("player")
+		export_data[player_name].race_name = UnitRace("player")
+
+		Maybe_Tradeskill_Export()
 	end
 
 	-------------------------------------------------------------------------------
@@ -69,11 +76,18 @@ ts_frame:SetScript("OnEvent", function(self, event, ...)
 				export_data[player_name].crafts[Id] = GetCraftInfo(k)
 			end
 		end
-		Tradeskill_Export()
+		export_data[player_name].guild_name = g_name
+		export_data[player_name].character_name = UnitName("player")
+		export_data[player_name].realm_name = GetRealmName()
+		export_data[player_name].faction_name = UnitFactionGroup("player")
+		export_data[player_name].class_name = UnitClass("player")
+		export_data[player_name].race_name = UnitRace("player")
+		Maybe_Tradeskill_Export()
 	end
 
 	if event == "CRAFT_CLOSE" or  event == "TRADE_SKILL_CLOSE" then
 		StaticPopup_Hide("EXPORT_TRADESKILL")
+		StaticPopup_Hide("EXPORT_AVAILABLE")
 	end
 
 end)
@@ -82,20 +96,43 @@ end)
 -------------------------------------------------------------------------------
 -- Show Export Window
 -------------------------------------------------------------------------------
+function Maybe_Tradeskill_Export()
+	if StaticPopup_Visible("EXPORT_AVAILABLE") or StaticPopup_Visible("EXPORT_TRADESKILL") then
+		return
+	else
+
+	local function notempty(s)
+		return s ~= nil or s ~= ''
+	end
+
+	if notempty(export_data[player_name].character_name) then
+		StaticPopupDialogs["EXPORT_AVAILABLE"] = {
+			text = "|cffff6188S|cfffc9867Y|cffffd866N|cffa9dc76Trade|cff78dce8Skill|cffab9df2Export|r\n\n",
+			button1 = "Export",
+			button1Pulse = true,
+			OnAccept = function (self, data, data2)
+				Tradeskill_Export()
+			end,
+			timeout = 0,
+			hasEditBox = false,
+			editBoxWidth = 200,
+			whileDead = true,
+			hideOnEscape = true,
+			preferredIndex = 3,
+		}
+
+		StaticPopup_Show("EXPORT_AVAILABLE")
+	end
+end
 
 function Tradeskill_Export()
-		export_data[player_name].guild_name = g_name
-		export_data[player_name].character_name = UnitName("player")
-		export_data[player_name].realm_name = GetRealmName()
-		export_data[player_name].faction_name = UnitFactionGroup("player")
-		export_data[player_name].class_name = UnitClass("player")
-		export_data[player_name].race_name = UnitRace("player")
+
 
 	export_data_json = encode_json(export_data)
 	ser = ts_ver .. ">>" .. export_data_json
 	serialized_json_export_data = Serialize(ser)
 	StaticPopupDialogs["EXPORT_TRADESKILL"] = {
-		text = "Paste this string into your guilds #professions channel on discord.",
+		text = "|cffff6188S|cfffc9867Y|cffffd866N|cffa9dc76Trade|cff78dce8Skill|cffab9df2Export|r\n\nCopy the text into your guilds #professions channel on Discord.\n",
 		button1 = "Done",
 		OnShow = function (self, data)
 			self.editBox:SetText("syntradeskillexport".. serialized_json_export_data)
@@ -109,10 +146,11 @@ function Tradeskill_Export()
 		hideOnEscape = true,
 		preferredIndex = 3,
 	}
-	StaticPopup_Show ("EXPORT_TRADESKILL")
+	StaticPopup_Hide("EXPORT_AVAILABLE")
+	StaticPopup_Show("EXPORT_TRADESKILL")
 
 end
-
+end
 -------------------------------------------------------------------------------
 -- Encode to Base 64
 -------------------------------------------------------------------------------
