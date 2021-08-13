@@ -34,6 +34,7 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 - Also available on [Curse](https://www.curseforge.com/wow/addons/see-you-next-tradeskill-export)
 
 ## Notes
+- Enchanting is not currently supported.
 - It is recommended to ensure that your nickname in your discord guild server is identical to your main characters name in game.
 - It is recommended to ensure that your discord server name is identical to your guild name in game.
 - It is recommended to log in to each of your characters and open both of your profession tabs for the first upload.
