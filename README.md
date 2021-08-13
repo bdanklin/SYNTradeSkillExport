@@ -6,14 +6,22 @@
 
 This addon is used to upload tradeskill information from World of Warcraft Classic to the See You Next Tuesday Discord Bot.
 
+## Triggering the bot
+
+- Search for an item using !item Skyfire Diamond
+
+![image](https://user-images.githubusercontent.com/34633373/129316745-33133435-464a-449e-b3d1-50cb7f66f364.png)
+
+
 ## Uploading Your Professions
+
+- Open your addon, click export, paste to discord!
 
 ![image](https://user-images.githubusercontent.com/34633373/128625093-a4145151-3fa6-431b-aede-684addf192e2.png)
 
 ![image](https://user-images.githubusercontent.com/34633373/128625145-d022eb59-cd23-44f9-a2cf-f8ab994f83a9.png)
 
 ![image](https://user-images.githubusercontent.com/34633373/128625207-948d3e0a-4d1a-4f88-abb3-13f79f12ab8d.png)
-
 
 ## Installation
 
@@ -25,10 +33,11 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 
 - Also available on [Curse](https://www.curseforge.com/wow/addons/see-you-next-tradeskill-export)
 
-![image](https://user-images.githubusercontent.com/34633373/128625577-524984c1-ce1e-4e61-93be-dd3be9a1a736.png)
-
-
-
+## Notes
+- It is recommended to ensure that your nickname in your discord guild server is identical to your main characters name in game.
+- It is recommended to ensure that your discord server name is identical to your guild name in game.
+- It is recommended to log in to each of your characters and open both of your profession tabs for the first upload.
+- The addon will export data for all characters whos profession data it has 'seen'. For the addon to 'see' the data initially, you must log in to that character and open a profession window. You can then either upload or log to a different character. For later uploads the new item will always be seen when added to your spellbook and you can then 
 
 ## Whomst?
 
