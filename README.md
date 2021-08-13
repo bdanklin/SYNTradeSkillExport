@@ -8,7 +8,7 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 
 ## Triggering the bot
 
-- Search for an item using !item Skyfire Diamond
+- Search for an item using `!item Skyfire Diamond`
 
 ![image](https://user-images.githubusercontent.com/34633373/129316745-33133435-464a-449e-b3d1-50cb7f66f364.png)
 
