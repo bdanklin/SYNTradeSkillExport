@@ -37,7 +37,7 @@ This addon is used to upload tradeskill information from World of Warcraft Class
 - It is recommended to ensure that your nickname in your discord guild server is identical to your main characters name in game.
 - It is recommended to ensure that your discord server name is identical to your guild name in game.
 - It is recommended to log in to each of your characters and open both of your profession tabs for the first upload.
-- The addon will export data for all characters whos profession data it has 'seen'. For the addon to 'see' the data initially, you must log in to that character and open a profession window. You can then either upload or log to a different character. For later uploads the new item will always be seen when added to your spellbook and you can then 
+- The addon will export data for all characters whos profession data it has 'seen'. For the addon to 'see' the data initially, you must log in to that character and open a profession window. You can then either upload or log to a different character. For later uploads the new item will always be seen when added to your spellbook and you can then upload at your leisure.
 
 ## Whomst?
 
