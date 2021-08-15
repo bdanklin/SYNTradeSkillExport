@@ -1,4 +1,4 @@
-local syntVer = "425"
+local syntVer = "426"
 local syntDecoder = "424"
 local syntFrame = CreateFrame("Frame")
 local ts_page = 1
